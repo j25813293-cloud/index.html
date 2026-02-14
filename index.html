@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Upload Service</title>
+    <title>Aaple CSC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
+    <div style="position:fixed;top:12px;right:12px;z-index:9999">
+        <button id="lang-en" class="btn btn-sm btn-outline-primary me-1">EN</button>
+        <button id="lang-mr" class="btn btn-sm btn-outline-secondary">MR</button>
+    </div>
+
+    <nav class="navbar bg-light mb-4">
+        <div class="container">
+            <span class="navbar-brand fw-bold" data-en="Aaple CSC" data-mr="आपले CSC"></span>
+        </div>
+    </nav>
     <!-- DOCUMENT UPLOAD -->
     <section class="container my-5">
-        <h2 class="text-center fw-bold mb-4"
-            data-en="Upload Required Documents"
-            data-mr="आवश्यक कागदपत्रे अपलोड करा">
+        <h2 class="text-center fw-bold mb-4" data-en="Upload Required Documents" data-mr="आवश्यक कागदपत्रे अपलोड करा">
         </h2>
 
         <div class="card shadow">
             <div class="card-body">
                 <form>
                     <div class="mb-3">
-                        <label class="form-label"
-                            data-en="Select Service"
-                            data-mr="सेवा निवडा"></label>
+                        <label class="form-label" data-en="Select Service" data-mr="सेवा निवडा"></label>
                         <select class="form-select">
                             <option data-en="Income Certificate" data-mr="उत्पन्न प्रमाणपत्र"></option>
                             <option data-en="Caste Certificate" data-mr="जात प्रमाणपत्र"></option>
@@ -30,21 +38,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label"
-                            data-en="Upload Aadhaar Card"
-                            data-mr="आधार कार्ड अपलोड करा"></label>
+                        <label class="form-label" data-en="Upload Aadhaar Card" data-mr="आधार कार्ड अपलोड करा"></label>
                         <input type="file" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label"
-                            data-en="Upload Other Documents"
+                        <label class="form-label" data-en="Upload Other Documents"
                             data-mr="इतर कागदपत्रे अपलोड करा"></label>
                         <input type="file" class="form-control" multiple>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100"
-                        data-en="Submit Documents"
+                    <button type="submit" class="btn btn-primary w-100" data-en="Submit Documents"
                         data-mr="कागदपत्रे सबमिट करा"></button>
                 </form>
 
@@ -56,6 +60,98 @@
         </div>
     </section>
 
+    <!-- FEES SECTION -->
+    <section class="container my-5">
+        <h2 class="text-center fw-bold mb-4" data-en="Service Charges" data-mr="सेवा शुल्क">
+        </h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped shadow">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th data-en="Service" data-mr="सेवा"></th>
+                        <th data-en="Fees (₹)" data-mr="शुल्क (₹)"></th>
+                        <th data-en="Time Required" data-mr="लागणारा कालावधी"></th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-center">
+                    <tr>
+                        <td data-en="Income Certificate" data-mr="उत्पन्न प्रमाणपत्र"></td>
+                        <td>₹100 – ₹150</td>
+                        <td data-en="7–10 Days" data-mr="७–१० दिवस"></td>
+                    </tr>
+
+                    <tr>
+                        <td data-en="Caste Certificate" data-mr="जात प्रमाणपत्र"></td>
+                        <td>₹200 – ₹300</td>
+                        <td data-en="15–30 Days" data-mr="१५–३० दिवस"></td>
+                    </tr>
+
+                    <tr>
+                        <td data-en="Residence Certificate" data-mr="रहिवासी प्रमाणपत्र"></td>
+                        <td>₹100 – ₹150</td>
+                        <td data-en="7 Days" data-mr="७ दिवस"></td>
+                    </tr>
+
+                    <tr>
+                        <td data-en="Birth / Death Certificate" data-mr="जन्म / मृत्यू प्रमाणपत्र"></td>
+                        <td>₹50 – ₹100</td>
+                        <td data-en="5–7 Days" data-mr="५–७ दिवस"></td>
+                    </tr>
+
+                    <tr>
+                        <td data-en="Online Form Filling" data-mr="ऑनलाइन अर्ज भरणे"></td>
+                        <td>₹50 – ₹500</td>
+                        <td data-en="Same Day" data-mr="त्याच दिवशी"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="text-muted text-center mt-2" data-en="*Government fees extra as applicable"
+            data-mr="*शासकीय शुल्क वेगळे लागू शकते">
+        </p>
+
+    </section>
+
+    <script>
+        (function () {
+            function applyLang(lang) {
+                document.querySelectorAll('[data-en]').forEach(function (el) {
+                    var en = el.getAttribute('data-en') || '';
+                    var mr = el.getAttribute('data-mr') || '';
+                    var text = (lang === 'mr') ? mr : en;
+                    if (!text) return;
+                    var tag = el.tagName.toLowerCase();
+                    if (tag === 'option') {
+                        el.textContent = text;
+                    } else if (tag === 'input') {
+                        var type = el.getAttribute('type') || '';
+                        if (type === 'submit' || type === 'button') el.value = text;
+                        else if (!el.value) el.placeholder = text;
+                    } else if (tag === 'textarea') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                });
+                // ensure buttons with data attributes are handled
+                document.querySelectorAll('button[data-en]').forEach(function (b) {
+                    b.textContent = (lang === 'mr') ? b.getAttribute('data-mr') : b.getAttribute('data-en');
+                });
+                localStorage.setItem('site-lang', lang);
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var saved = localStorage.getItem('site-lang') || 'en';
+                applyLang(saved);
+                document.getElementById('lang-en').addEventListener('click', function () { applyLang('en'); });
+                document.getElementById('lang-mr').addEventListener('click', function () { applyLang('mr'); });
+            });
+        })();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
